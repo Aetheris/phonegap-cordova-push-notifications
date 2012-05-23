@@ -37,3 +37,6 @@ if(typeof(invokeString) != "undefined" && invokeString.length > 0 &&  invokeStri
 8. See PushNotification.js for more information on the interface
 
 9. Wasn't it TOO EASY?
+
+P.S. You might want to ask - "Do I have to change AppDelegate.m file as for all other PN plugins?".
+No! You have to do only the steps mentioned above. That's where the magic comes true.
