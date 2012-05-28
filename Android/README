@@ -1,0 +1,29 @@
+// Cordova Android Pushwoosh Push Notifications plugin
+// (c) Pushwoosh, 2012
+
+1. Add "PushNotifications.java" plugin to your project. Change the package name.
+2. Add the PushNotification.js file to your "www" folder on disk
+3. Add the reference to the .js file using `<script>` tags in your html file(s):
+    <script type="text/javascript" src="/js/plugins/PushNotification.js"></script>
+
+4. Add new entry to your "plugins.xml"
+<plugin name="PushNotifications" value="com.pushwoosh.test.plugin.pushnotifications.PushNotifications" onload="true"/>
+Don't forget to change the package name.
+
+5. See the index.html and main.js sample for the Javascript integration.
+
+6. Handling push notification. This method gets called when push notification has been received.
+document.addEventListener('push-notification', function(event) {
+							console.warn('push-notification!: ' + event.notification);
+							navigator.notification.alert(JSON.stringify(['push-notification!', event.notification]));
+						  });
+
+6. See PushNotification.js for more information on the interface
+
+7. Add <access origin="https://cp.pushwoosh.com" subdomains="true" /> to the cordova.xml
+
+8. Modify AndroidManifest.xml as specified here:
+http://www.pushwoosh.com/programming-push-notification/android-push-notification-for-phonegap/
+Follow the steps 1-3.
+
+P.S. lib folder contains already compiled library (.jar) of the source code

@@ -11,7 +11,7 @@ pushManager = [[PushNotificationManager alloc] initWithApplicationCode:@"YOUR_PU
 3. Add the PushNotification.js file to your "www" folder on disk
 
 4. Add the reference to the .js file using `<script>` tags in your html file(s):
-    <script type="text/javascript" src="/js/plugins/PushNotification.js"></script>
+	<script type="text/javascript" charset="utf-8" src="PushNotification.js"></script>
 
 5. Add new entry with key `PushNotification` and value `PushNotification` to `Plugins` in "Cordova.plist/Cordova.plist"
 
