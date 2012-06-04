@@ -86,7 +86,17 @@
 	if(pushManager == nil) {
 		AppDelegate * delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 		UIViewController * mainVC = delegate.viewController;
-		pushManager = [[PushNotificationManager alloc] initWithApplicationCode:@"YOUR_PUSHWOOSH_APP_CODE" navController:mainVC appName:@"APP_NAME" ];
+		
+		NSString * appid = [[NSUserDefaults standardUserDefaults] objectForKey:@"Pushwoosh_APPID"];
+		
+		if(!appid)
+			return nil;
+		
+		NSString * appname = [[NSUserDefaults standardUserDefaults] objectForKey:@"Pushwoosh_APPNAME"];
+		if(!appname)
+			appname = @"";
+			
+		pushManager = [[PushNotificationManager alloc] initWithApplicationCode:appid navController:mainVC appName:appname ];
 		pushManager.delegate = self;
 	}
 	return pushManager;
@@ -110,7 +120,20 @@
 
 	if (notificationTypes == UIRemoteNotificationTypeNone)
 		NSLog(@"PushNotification.registerDevice: Push notification type is set to none");
-
+	
+	NSString *appid = [options objectForKey:@"appid"];
+	NSString *appname = [options objectForKey:@"appname"];
+	
+	if(!appid) {
+		NSLog(@"PushNotification.registerDevice: Missing Pushwoosh App ID");
+		return;
+	}
+	
+	[[NSUserDefaults standardUserDefaults] setObject:appid forKey:@"Pushwoosh_APPID"];
+	if(appname) {
+		[[NSUserDefaults standardUserDefaults] setObject:appname forKey:@"Pushwoosh_APPNAME"];
+	}
+	
 	//[[UIApplication sharedApplication] unregisterForRemoteNotifications];
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:notificationTypes];
 

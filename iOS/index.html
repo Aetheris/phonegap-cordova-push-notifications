@@ -63,7 +63,7 @@
 		}
 
 		var pushNotification = window.plugins.pushNotification;
-		pushNotification.registerDevice({alert:true, badge:true, sound:true},
+		pushNotification.registerDevice({alert:true, badge:true, sound:true, appid:"PUSHWOOSH_APP_CODE", appname:"APP_NAME"},
 										function(status) {
 											console.warn('registerDevice:%o', status);
 											navigator.notification.alert(JSON.stringify(['registerDevice', status]));
