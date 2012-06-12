@@ -32,8 +32,14 @@
 - (BOOL) application:(UIApplication*)application newDidFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
 	BOOL result = [self application:application newDidFinishLaunchingWithOptions:launchOptions];
 
+	PushNotification *pushHandler = [self.viewController getCommandInstance:@"PushNotification"];
+	if(!pushHandler || !pushHandler.pushManager)
+		return result;
+
 	if(result) {
 		NSDictionary * userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];	
+		[pushHandler.pushManager handlePushReceived:userInfo];
+
 		if(userInfo) {
 			NSString *jsonString = [userInfo JSONString];
 			jsonString = [jsonString stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
